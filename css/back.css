@@ -1,0 +1,18 @@
+.reservas .reservas-head ul li.active:before,
+.reservas .reservas-head ul li.active:after{
+    border-left: 25px solid #000;
+}
+.reservas .reservas-head ul li.active a{
+    background: #000;
+}
+.reservas .reservas-head ul li:not(.active):before,
+.reservas .reservas-head ul li:not(.active):after{
+    border-left: 25px solid blue;
+}
+.reservas .reservas-head ul li:not(.active) a{
+    background: blue;
+}
+.reservas .reservas-head ul .items li:not(.active):last-child:after,
+.reservas .reservas-head ul li:not(.active):first-child:before{
+    border-left: 25px solid blue;
+}
