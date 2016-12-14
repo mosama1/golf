@@ -150,9 +150,9 @@ $userRow=$stmt->fetch(PDO::FETCH_OBJ);
 
 										</div>
 
-										<li class="_mas">
+										<!-- <li class="_mas">
 											<a href="#"><span>+</span></a>
-										</li>
+										</li> -->
 									</ul>
 								</div>
 								<div class="reservas-cont">

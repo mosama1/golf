@@ -15,7 +15,7 @@ $n = 1;
 			<tr>
 				<th colspan="6" class="title">CATEGORIA</th>
 			</tr>
-			<tr class="encabezadoAgregar">
+			<!-- <tr class="encabezadoAgregar">
 				<th>
 					<a href="#" class="valign-wrapper" id="agregarCategoria">
 						<div class="icono valign-wrapper">
@@ -46,16 +46,13 @@ $n = 1;
 				<th>
 
 				</th>
-				<th>
 
-				</th>
 				<th></th>
-			</tr>
+			</tr>-->
 			<tr class="encabezado">
 				<th width="15%"><h5>N°</h5></th>
 				<th width="25%"><h5>Actividad</h5></th>
 				<th width="5%"><h5>Ver</h5></th>
-				<th width="25%"><h5>Tipo</h5></th>
 				<th width="15%"><h5>Habilitado</h5></th>
 				<th width="15%"><h5>Eliminar</h5></th>
 
@@ -72,20 +69,7 @@ $n = 1;
 								<i class="fa fa-eye"></i>
 							</a>
 						</td>
-						<td>
-							<?php if ($d->tipo == 'cancha'): ?>
-								<select required="required" id="tipo" name="tipo">
-									<option value"cancha">Cancha</option>
-									<option value="clase">Clase</option>
-								</select>
-								<?php else: ?>
-									<select required="required" id="tipo" name="tipo">
-										<option value="clase">Clase</option>
-										<option value"cancha">Cancha</option>
-									</select>
-							<?php endif; ?>
-							<!-- <?php echo $d->tipo; ?> -->
-						</td>
+
 						<?php if ($d->habilitado != 1 ) { ?>
 							<td>
 								<input type="checkbox" id="<?php echo $d->id?>" onclick="habilitarDepartamento('agregar',<?php echo $d->id?>)">
@@ -195,7 +179,7 @@ function agregarDepartamento(idUser) {
 	campo = '<tr id="inputAddDepartamento">';
 	campo += '  <td><button onclick="departamento('+idUser+');" class="btn btn-success">A&ntilde;adir</button></td>';
 	campo += '  <td><input type="text" required="required" class="form-control" id="departamento" name="departamento"></td>';
-	campo += '  <td><select required="required" class="form-control anadir" id="tipo" name="tipo"><option value"cancha">Cancha</option><option value="clase">Clase</option></select></td>';
+	campo += '  <td><input type="hidden" required="required" class="form-control anadir" id="tipo" name="tipo" value="cancha"></td>';
 	campo += '</tr>';
 	$("#inputDepartamento").append(campo);
 

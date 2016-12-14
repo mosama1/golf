@@ -139,11 +139,11 @@ if(isset($_POST['btn-login']))
          <img class="img-normal" src="img/logo.fw.png" alt="" />
     <div class="collapse navbar-collapse navbar-ex1-collapse col-md-7">
       <ul class="nav navbar-nav navbar-right" id="items">
-        <li><a href="index.html" id="ir-index">Inicio</a></li>
+        <!-- <li><a href="index.html" id="ir-index">Inicio</a></li>
         <li><a href="nosotros.html" id="ir-nosotros">Nosotros</a></li>
         <li><a href="servicios.html" id="ir-servicios">Servicios</a></li>
         <li><a href="ingresar.php" id="ir-reservar" class="active">Reservar</a></li>
-        <li><a href="contacto.html" id="ir-contacto">Contacto</a></li>
+        <li><a href="contacto.html" id="ir-contacto">Contacto</a></li> -->
       </ul>
     </div>
   </nav>

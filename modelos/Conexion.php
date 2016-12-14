@@ -3,7 +3,7 @@
    private $tipo_de_base = 'mysql';
    private $host = "10.1.100.246";
 
-   private $nombre_de_base = 'avilaFit';
+   private $nombre_de_base = 'golf';
    private $usuario = "gtineo";
    private $contrasena = '';
    public function __construct() {

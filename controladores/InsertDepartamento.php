@@ -30,20 +30,6 @@ if ($_POST) {
               <i class="fa fa-eye"></i>
             </a>
           </td>
-          <td>
-            <?php if ($d->tipo == 'cancha'): ?>
-              <select required="required" id="tipo" name="tipo">
-                <option value"cancha">Cancha</option>
-                <option value="clase">Clase</option>
-              </select>
-              <?php else: ?>
-                <select required="required" id="tipo" name="tipo">
-                  <option value="clase">Clase</option>
-                  <option value"cancha">Cancha</option>
-                </select>
-            <?php endif; ?>
-            <!-- <?php echo $d->tipo; ?> -->
-          </td>
           <?php if ($d->habilitado != 1 ) { ?>
             <td>
               <input type="checkbox" id="<?php echo $d->id?>" onclick="habilitarDepartamento('agregar',<?php echo $d->id?>)">
