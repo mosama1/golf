@@ -192,7 +192,7 @@ $('.reservas .reservas-cont .reservas-fecha .fecha').click(function(){
             if (ej !== true) {
               var muestra = '<div class="text" id="'+depCat+'" onmouseout="textHover(2,'+depCat+') onmouseover="textHover(1,'+depCat+')">';
               muestra += '<h5>'+nombre_+'</h5>';
-              muestra += '<div class="icon-mas"><i class="fa fa-eye"></i></div>';
+              // muestra += '<div class="icon-mas"><i class="fa fa-eye"></i></div>';
               muestra +=	'</div>';
               $('.detalle-reservas-cont .detalle .titulo .texto').append(muestra);
               $('#script').html($('#locura').html());

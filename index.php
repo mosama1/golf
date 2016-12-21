@@ -85,8 +85,8 @@ if(isset($_POST['btn-login']))
 <html lang="es">
 
 <head>
-    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
-    <link rel="icon" href="img/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon">
+    <link rel="icon" href="../img/favicon.png" type="image/x-icon">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -100,180 +100,121 @@ if(isset($_POST['btn-login']))
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/animate.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/normalize.css" rel="stylesheet">
+		<link href="https://cdn.jsdelivr.net/hint.css/2.4.0/hint.min.css" rel="stylesheet" type='text/css'>
+    <!-- <link href="../css/normalize.css" rel="stylesheet"> -->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300italic,300,400italic,600,700,600italic,700italic,800,800italic' rel='stylesheet' type='text/css'>
     <link href="css/style.css" rel="stylesheet">
-		<style media="screen">
-			#nosotros,
-			.nosotros{
-
-				height: 100% !important;
-				padding: 0;
-			}
-			.nosotros center{
-				width: 100%;
-			}
-		</style>
 
 </head>
 
-<body id="nosotros" class="img-responsive" style="background-image: url('img/fondo-nosotros.jpg')">
-
-  <nav class="navbar navbar-default normal" role="navigation" id="menu">
-    <!-- El logotipo y el icono que despliega el menú se agrupan
-         para mostrarlos mejor en los dispositivos móviles -->
-    <div class="navbar-header col-md-3">
-      <button type="button" class="navbar-toggle" data-toggle="collapse"
-              data-target=".navbar-ex1-collapse">
-        <span class="sr-only">Desplegar navegación</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-    </div>
-
-    <!-- Agrupar los enlaces de navegación, los formularios y cualquier
-         otro elemento que se pueda ocultar al minimizar la barra -->
-
-         <img class="img-normal" src="img/logo.fw.png" alt="" />
-    <div class="collapse navbar-collapse navbar-ex1-collapse col-md-7">
-      <ul class="nav navbar-nav navbar-right" id="items">
-        <!-- <li><a href="index.html" id="ir-index">Inicio</a></li>
-        <li><a href="nosotros.html" id="ir-nosotros">Nosotros</a></li>
-        <li><a href="servicios.html" id="ir-servicios">Servicios</a></li>
-        <li><a href="ingresar.php" id="ir-reservar" class="active">Reservar</a></li>
-        <li><a href="contacto.html" id="ir-contacto">Contacto</a></li> -->
-      </ul>
-    </div>
-  </nav>
-
-  <div class="nosotros col-md-12 col-sm-12 col-xs-12 valign-wrapper" id="ingresar">
-		<div class="ingresar valign-wrapper">
-			<center>
-				<div class="form valign">
-					<form action="" class="form-signin" method="post" id="login-form">
-						<div class="usuario input valign-wrapper">
-							<div class="inp valign">
-								<label for="email">USUARIO&nbsp;&nbsp;</label>
-								<input type="email" name="Usuario" class="form-control" id="email">
+<body class="img-responsive" style="background-image: url('img/fondos/index.jpg')">
+	<div id="index">
+		<div class="nosotros ">
+			<div class="ingresar active" id="ingresar">
+				<center>
+					<div class="form ">
+						<form action="" class="form-signin" method="post" id="login-form">
+							<div class="usuario input ">
+								<div class="inp ">
+									<!-- <label for="email">USUARIO&nbsp;&nbsp;</label> -->
+									<input type="email" name="Usuario" class="form-control" id="email" placeholder="USUARIO">
+								</div>
 							</div>
-						</div>
-						<div class="password input valign-wrapper">
-							<div class="inp valign">
-								<label for="pwd">PASSWORD&nbsp;&nbsp;</label>
-								<input type="password" name="Password" class="form-control" id="pwd">
+							<div class="password input ">
+								<div class="inp ">
+									<!-- <label for="pwd">PASSWORD&nbsp;&nbsp;</label> -->
+									<input type="password" name="Password" class="form-control" id="pwd" placeholder="PASSWORD">
+								</div>
 							</div>
-						</div>
-						<div class="boton">
-							<div class="bot">
-								<button type="submit" name="btn-login" id="enviar-btn" class="waves-effect waves-brown" >Ingresar</button>
+							<div class="boton">
+								<div class="bot">
+									<button type="submit" name="btn-login" id="enviar-btn" class="waves-effect waves-brown" >Ingresar</button>
+								</div>
+								<div class="bot">
+									<button type="submit" name="btn-login" id="enviar-btn" class="waves-effect waves-brown registrarse">
+										<span>nuevo</span>
+										<span>usuario</span>
+									</button>
+								</div>
 							</div>
-							<div class="bot">
-								<button type="submit" name="btn-login" id="enviar-btn" class="waves-effect waves-brown registrarse">
-									<span>nuevo</span>
-									<span>usuario</span>
-								</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</center>
-		</div>
-		<div class="ingresar valign-wrapper">
-			<center>
-				<div class="form valign">
-					<div class="error">
-
+						</form>
 					</div>
-					<form action="" class="form-signin" method="post" id="register-form">
+				</center>
+			</div>
+			<div class="ingresar none" id="registrarse">
+				<center>
+					<div class="form ">
+						<div class="error">
 
-						<div class="usuario input valign-wrapper">
-							<div class="inp valign">
-								<label for="email">Nombre&nbsp;&nbsp;</label>
-								<input type="text" name="nombre" class="form-control" id="nombre">
-							</div>
 						</div>
-						<div class="password input valign-wrapper">
-							<div class="inp valign">
-								<label for="pwd">APELLIDO&nbsp;&nbsp;</label>
-								<input type="text" name="apellido" class="form-control" id="apellido">
-							</div>
-						</div>
-						<div class="usuario input valign-wrapper">
-							<div class="inp valign">
-								<label for="pwd">CEDULA&nbsp;&nbsp;</label>
-								<select  name="codCedula">
-									<option value='V'>V</option>
-									<option value='E'>E</option>
-								</select>
-								<input type="text" name="cedula" class="form-control" id="pwd">
-							</div>
-						</div>
+						<form action="" class="form-signin" method="post" id="register-form">
 
-						<div class="password input valign-wrapper">
-							<div class="inp valign">
-								<label for="email">TELEFONO&nbsp;&nbsp;</label>
-								<input type="text" name="telefono" class="form-control" id="telefono">
+							<div class="usuario input ">
+								<div class="inp ">
+									<!-- <label for="email">Nombre&nbsp;&nbsp;</label> -->
+									<input type="text" name="nombre" class="form-control" id="nombre" placeholder="Nombre">
+								</div>
 							</div>
-						</div>
-						<div class="usuario input valign-wrapper">
-							<div class="inp valign">
-								<label for="pwd">CORREO&nbsp;&nbsp;</label>
-								<input type="email" name="email" class="form-control" id="email">
+							<div class="password input ">
+								<div class="inp ">
+									<!-- <label for="pwd">APELLIDO&nbsp;&nbsp;</label> -->
+									<input type="text" name="apellido" class="form-control" id="apellido" placeholder="APELLIDO">
+								</div>
 							</div>
-						</div>
-						<div class="password input valign-wrapper">
-							<div class="inp valign">
-								<label for="email">PASSWORD&nbsp;&nbsp;</label>
-								<input type="password" name="pw" class="form-control" id="pw">
+							<div class="usuario input cedula">
+								<div class="inp ">
+									<!-- <label for="pwd">CEDULA&nbsp;&nbsp;</label> -->
+									<select  name="codCedula">
+										<option value='V' selected>V</option>
+										<option value='E'>E</option>
+									</select>
+									<input type="text" name="cedula" class="form-control" id="pwd" placeholder="CEDULA">
+								</div>
 							</div>
-						</div>
-						<div class="usuario input valign-wrapper">
-							<div class="inp valign">
-								<label for="pwd">CONFIRMAR&nbsp;&nbsp;</label>
-								<input type="password" name="pw2" class="form-control" id="pw2">
+
+							<div class="password input ">
+								<div class="inp ">
+									<!-- <label for="email">TELEFONO&nbsp;&nbsp;</label> -->
+									<input type="text" name="telefono" class="form-control" id="telefono" placeholder="TELEFONO">
+								</div>
 							</div>
-						</div>
-						<div class="boton">
-							<div class="bot">
-								<button name="enviar-btnUser" id="enviar-btnUser" class="waves-effect waves-brown" >Guardar</button>
+							<div class="usuario input ">
+								<div class="inp ">
+									<!-- <label for="pwd">CORREO&nbsp;&nbsp;</label> -->
+									<input type="email" name="email" class="form-control" id="email" placeholder="CORREO">
+								</div>
 							</div>
-							<div class="bot">
-								<button type="submit" name="" id="" class="waves-effect waves-brown iniciar_seccion">
-									<span>Iniciar</span>
-									<span>session</span>
-								</button>
+							<div class="password input ">
+								<div class="inp ">
+									<!-- <label for="email">PASSWORD&nbsp;&nbsp;</label> -->
+									<input type="password" name="pw" class="form-control" id="pw" placeholder="PASSWORD">
+								</div>
 							</div>
-						</div>
-					</form>
-				</div>
-			</center>
+							<div class="usuario input ">
+								<div class="inp ">
+									<!-- <label for="pwd">CONFIRMAR&nbsp;&nbsp;</label> -->
+									<input type="password" name="pw2" class="form-control" id="pw2" placeholder="CONFIRMAR">
+								</div>
+							</div>
+							<div class="boton">
+								<div class="bot">
+									<button name="enviar-btnUser" id="enviar-btnUser" class="waves-effect waves-brown" >Guardar</button>
+								</div>
+								<div class="bot">
+									<button type="submit" name="" id="" class="waves-effect waves-brown ingresar_">
+										<span>Iniciar</span>
+										<span>session</span>
+									</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</center>
+			</div>
+
 		</div>
+	</div>
 
-  </div>
-
-
-  <div class="visible-lg">
-    <br>
-  </div>
-
-  <footer class="col-sm-12 col-xs-12" style="bottom: 0px; position: absolute;">
-    <div class="footer-detalles col-md-7 col-sm-7 col-xs-7">
-      <div class="">Todos Los derechos reservados. Diseñado por <a href="http://dementecreativo.com/" target="_blank"> <img src="img/demente.png" alt="" /> </a></div></div>
-    </div>
-    <div class="footer-redes col-md-5 col-sm-5 col-xs-5">
-      <div class="border-redes"><i class="fa fa-facebook"></i></div>
-      <div class="border-redes"><i class="fa fa-twitter"></i></div>
-      <div class="border-redes"><i class="fa fa-instagram"></i></div>
-    </div>
-  </footer>
-
-
-  <div class="preloader1" id="preloader1"><img src="img/logo-parte1.png" alt="" /></div>
-  <div class="preloader2" id="preloader2"><img src="img/logo-parte2.png" alt="" /></div>
-  <div class="cortina1" id="cortina1"><img src="img/logo-parte1.png" alt="" /></div>
-  <div class="cortina2" id="cortina2"><img src="img/logo-parte2.png" alt="" /></div>
 
 
     <script src="js/jquery-1.11.3.min.js"></script>
@@ -306,11 +247,21 @@ if(isset($_POST['btn-login']))
 				}
 			});
 
-			$('.boton .bot button.iniciar_seccion, .boton .bot button.registrarse').click(function(){
-				if ($(this).hasClass('iniciar_seccion')) {
-					$('#ingresar').removeClass('active');
+			$('.boton .bot button.ingresar_, .boton .bot button.registrarse').click(function(){
+				if ($(this).hasClass('ingresar_')) {
+					$('#ingresar').removeClass('none');
+					$('.nosotros .ingresar').removeClass('active');
+					setTimeout(function(){
+						$('#ingresar').addClass('active');
+						$('#registrarse').removeClass('none');
+					},500);
 				}else if ($(this).hasClass('registrarse')) {
-					$('#ingresar').addClass('active');
+					$('#registrarse').removeClass('none');
+					$('.nosotros .ingresar').removeClass('active');
+					setTimeout(function(){
+						$('#registrarse').addClass('active');
+						$('#ingresar').removeClass('none');
+					},500);
 				}
 				return false;
 			});

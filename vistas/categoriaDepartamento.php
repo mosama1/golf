@@ -134,9 +134,11 @@ $('.reservas .reservas-cont .reservas-fecha .fecha').click(function(){
 });
 
 function buscarCatergoria(idUser, id, tipo, hora, id_th){
+  var cont = $('#'+id_th).parent().parent().parent();
   function activar() {
     $('.reservas .reservas-cont table thead th').removeClass('active');
     $('#'+id_th).addClass('active');
+    cont.addClass('active');
   }
   if (tipo == 'cancha') {
       $.ajax({
@@ -192,7 +194,7 @@ function buscarCatergoria(idUser, id, tipo, hora, id_th){
             if (ej !== true) {
               var muestra = '<div class="text" id="'+depCat+'" onmouseout="textHover(2,'+depCat+') onmouseover="textHover(1,'+depCat+')">';
               muestra += '<h5>'+nombre_+'</h5>';
-              muestra += '<div class="icon-mas"><i class="fa fa-eye"></i></div>';
+              // muestra += '';
               muestra +=	'</div>';
               $('.detalle-reservas-cont .detalle .titulo .texto').append(muestra);
               $('#script').html($('#locura').html());

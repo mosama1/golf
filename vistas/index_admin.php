@@ -76,22 +76,35 @@ $userRow=$stmt->fetch(PDO::FETCH_OBJ);
     <!-- <link href="../css/normalize.css" rel="stylesheet"> -->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300italic,300,400italic,600,700,600italic,700italic,800,800italic' rel='stylesheet' type='text/css'>
     <link href="../css/style.css" rel="stylesheet">
-		<style media="screen">
-		html, body {
-				font-family:arial, sans-serif;
-				min-height: 100% !important;
-		}
-		#nosotros{
-			height: 100% !important;
-		}
-		.nosotros {
-		    min-height: calc(100% - 110px);
-		}
-		</style>
 
 </head>
 
-<body id="nosotros" class="img-responsive" style="background-image: url('../img/fondo-nosotros.jpg')">
+<body class="img-responsive" style="background-image: url('../img/fondos/reserva.jpg')">
+	<div class="preload">
+		<center>
+			<ul>
+				<li class="">
+					<img src="../img/preload/1.png" alt="">
+				</li>
+				<li>
+					<img src="../img/preload/2.png" alt="">
+				</li>
+				<li>
+					<img src="../img/preload/3.png" alt="">
+				</li>
+				<li>
+					<img src="../img/preload/4.png" alt="">
+				</li>
+				<li>
+					<img src="../img/preload/5.png" alt="">
+				</li>
+				<li>
+					<img src="../img/preload/6.png" alt="">
+				</li>
+			</ul>
+		</center>
+
+	</div>
 	<div class="rotate valign-wrapper">
 		<center>
 			<img src="../img/icons/rotate_movil.gif" alt=""  class="valign"/>
@@ -99,9 +112,7 @@ $userRow=$stmt->fetch(PDO::FETCH_OBJ);
 
 	</div>
 
-  <nav class="navbar navbar-default normal" role="navigation" id="menu">
-    <!-- El logotipo y el icono que despliega el menú se agrupan
-         para mostrarlos mejor en los dispositivos móviles -->
+  <!-- <nav class="navbar navbar-default normal" role="navigation" id="menu">
     <div class="navbar-header col-md-3">
       <button type="button" class="navbar-toggle" data-toggle="collapse"
               data-target=".navbar-ex1-collapse">
@@ -113,8 +124,6 @@ $userRow=$stmt->fetch(PDO::FETCH_OBJ);
       </button>
     </div>
 
-    <!-- Agrupar los enlaces de navegación, los formularios y cualquier
-         otro elemento que se pueda ocultar al minimizar la barra -->
 
          <img class="img-normal" src="../img/logo.fw.png" alt="" />
     <div class="collapse navbar-collapse navbar-ex1-collapse col-md-7">
@@ -125,13 +134,58 @@ $userRow=$stmt->fetch(PDO::FETCH_OBJ);
         <li><a href="../controladores/Logout_trabajador.php?logout=true">Salir</a></li>
       </ul>
     </div>
-  </nav>
+  </nav> -->
 
-	<div class="nosotros" id="contenido">
-
-			<div class="" id="error">
-
+	<nav class="navbar navbar-default menu_" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Desplegar navegación</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
 			</div>
+
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav navbar-left ul_left">
+					<li>
+						<a href="#" onclick="contenido('reservasAdmin.php', <?php echo $userRow->id ?>); return false;">
+							<span>Reservas</span>
+						</a>
+					</li>
+					<li class="active">
+						<a href="inicio.php">
+							<span>Inicio</span>
+						</a>
+					</li>
+				</ul>
+				<ul class="logo">
+					<li>
+						<img src="../img/logo.png" alt="">
+					</li>
+				</ul>
+
+
+				<ul class="nav navbar-nav navbar-right ul_right">
+					<li class="active">
+						<a href="#" onclick="contenido('departamento.php', <?php echo $userRow->id ?>); return false;">
+							<span>Departamento</span>
+						</a>
+					</li>
+					<li>
+						<a href="../controladores/Logout_trabajador.php?logout=true">
+							<span>Salir</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div id="contenido">
+		<div class="" id="error">
+		</div>
 
 
 				<?php
@@ -140,205 +194,296 @@ $userRow=$stmt->fetch(PDO::FETCH_OBJ);
 					$categorias=$categorias->fetchAll(PDO::FETCH_OBJ);
 
 				?>
-				<div class="col-md-6">
-					<center>
-						<div class="reservas">
+		<div class="reservas division">
+			<center>
+				<div class="division_cont">
+					<div class="reservas-head">
+						<ul>
+							<?php foreach ($categorias as $c) { ?>
+								<li id="cate_<?php echo $c->id ?>">
+									<a href="#" onclick="return false;"><span><?php echo $c->nombre ?></span></a>
+									<!-- <a href="#" onclick="buscarCategorias(<?php echo $c->id ?>,<?php echo $userRow->id ?>, '<?php echo $c->tipo ?>')"><span><?php echo $c->nombre ?></span></a> -->
+								</li>
+							<?php } ?>
+						</ul>
+					</div>
+					<div class="reservas-cont">
+						<div class="contenidoSeleccion" id="contenidoSeleccion">
+							<?php
+							  $user = $conexion->prepare("SELECT * FROM usuarios WHERE id = '".$userRow->id."'");
+							  $user->execute();
+							  $user=$user->fetch(PDO::FETCH_OBJ);
+
+							  $categorias = $conexion->prepare("SELECT * FROM categorias_departamento where idDepartamento = '".$c->id."' and habilitado = 1");
+							  $categorias->execute();
+							  $categorias=$categorias->fetchAll(PDO::FETCH_OBJ);
+
+							  //SE BUSCA LA HORA DE INICIO Y LA HORA FIN PARA HACER EL ENCABEZADOY LOS CACULOS NECESAROS
+							  $hora = $conexion->prepare("SELECT idDepartamento, min(horaInicio) as horaInicio, max(horaFin) as horaFin
+							                              FROM categorias_departamento where idDepartamento = '".$c->id."' ");
+							  $hora->execute();
+							  $hora=$hora->fetch(PDO::FETCH_OBJ);
 
 
+							  $horaInicio= date("h", strtotime($hora->horaInicio)); //selecciono la mayor hora de inicio de la BD de pendiendo del departamento
+							  $horaFin= date("H", strtotime($hora->horaFin));//selecciono la mayor hora de fin de la BD de pendiendo del departamento
+							  //END
 
-								<div class="reservas-head">
-									<ul>
-										<div class="items">
-											 <?php foreach ($categorias as $c) { ?>
-												<li id="cate_<?php echo $c->id ?>">
-													<a href="#" onclick="buscarCategorias(<?php echo $c->id ?>,<?php echo $userRow->id ?>, '<?php echo $c->tipo ?>')"><span><?php echo $c->nombre ?></span></a>
-												</li>
-											<?php } ?>
-
-										</div>
-
-										<!-- <li class="_mas">
-											<a href="#"><span>+</span></a>
-										</li> -->
-									</ul>
-								</div>
-								<div class="reservas-cont">
-
-									<div class="contenidoSeleccion" id="contenidoSeleccion">
-
-									</div>
-								</div>
+							  //IMG DEPENDE EL DEPARTAMENTO
+							  $departamentoImg = $conexion->prepare("SELECT * FROM departamento where id = '".$hora->idDepartamento."' ");
+							  $departamentoImg->execute();
+							  $departamentoImg=$departamentoImg->fetch(PDO::FETCH_OBJ);
 
 
-						</div>
-					</center>
+							?>
+							<div class="reservas-fecha">
 
-				</div>
-				<div class="col-md-6">
-					<center>
-						<div class="detalle-reservas">
-							<div class="detalle-reservas-head">
-								<p>
-									Detalles de la Reserva
-								</p>
+							  <div class="icon">
+							    <center>
+							      <img src="../img/icons/fecha.png">
+							      <input type="date" min="<?php echo date("Y-m-d") ?>" name="date" id="dateReserva" value="<?php echo date("Y-m-d") ?>">
+							    </center>
+							  </div>
+
+							  <div class="fecha">
+							    <p>
+							      <?php
+							        $dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
+							        $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+
+							        echo $dias[date('w')]." ".date('d')." de ".$meses[date('n')-1]. " del ".date('Y') ;
+							        //Salida: Viernes 24 de Febrero del 2012
+							       ?>
+							    </p>
+							  </div>
+
+							  <div class="flecha valign-wrapper">
+							    <i class="fa fa-caret-right right valign" aria-hidden="true"></i>
+							  </div>
 							</div>
-							<div class="detalle-reservas-cont" id="contDetalle">
-								<div class="col-md-5 detalle">
-									<div class="item">
-										<center>
-											<div class="titulo">
-												<div class="icon">
-													<img src="../img/icons/descripcion.png" alt="" />
-												</div>
-												<div class="texto" id="detalle">
 
-													<?php
-														$apartado = $conexion->prepare("SELECT * FROM apartado where iduser = '".$userRow->id."' and fecha >= '".date("Y-m-d")."' group by idcategoria");
-														$apartado->execute();
-														$apartado=$apartado->fetchAll(PDO::FETCH_OBJ);
+							<div class="seleccionTabla">
 
-															foreach ($apartado as $a) {
-													?>
-																<div class="text" id="<?php echo $a->idDepartamento ?>_<?php echo $a->idcategoria ?>">
-																	<h5><?php echo $a->nombreCategoria ?></h5>
-																	<div class="icon-mas"><i class="fa fa-eye"></i></div>
-																</div>
-													<?php
+							  <table class="table table-hover">
+							    <thead>
+							      <tr>
+							        <th>Tipo
+							          <div class="icon">
+							            <img src="../img/icons/reloj.png">
+							          </div>
+							          <div class="flecha valign-wrapper">
+							            <i class="fa fa-caret-left valign left" aria-hidden="true"></i>
+							          </div>
+							        </th>
+							        <?php
+							        ?>
+							        <?php
+							          for ($n=0; $n <= ( $horaFin - $horaInicio ); $n++) {
+							            //hacer acumulador para ir sumando una hora
+							        ?>
+							          <th id='th_<?php echo date("hi", strtotime($hora->horaInicio)+(3600*$n)) ?>'>
+							            <a href='#' onclick="buscarCatergoria(<?php echo $user->id ?>,<?php echo $c->id ?>,'<?php echo $c->tipo ?>','<?php echo date("h:i a", strtotime($hora->horaInicio)+(3600*$n)) ?>', 'th_<?php echo date("hi", strtotime($hora->horaInicio)+(3600*$n)) ?>')" >
+							              <?php echo date("h:i a", strtotime($hora->horaInicio)+(3600*$n)) ?>
+							            </a>
+							          </th>
+							        <?php
+							          }
+							        ?>
+							      </tr>
+							    </thead>
+							  </table>
+							</div>
+							<div class="contBuscar" id="contBuscar">
+							  </div>
+							<!-- </div> -->
+						</div>
+					</div>
+				</div>
+			</center>
 
 
-													}
-													$precio = $conexion->prepare("SELECT sum(precio) as subTotal FROM apartado where idUser = '".$userRow->id."'  and fecha >= '".date("Y-m-d")."' " );
-													$precio->execute();
-													$precio=$precio->fetch(PDO::FETCH_OBJ);
+		</div>
 
-													$iva = 12 * $precio->subTotal;
-													$iva = $iva / 100;
-
-													$total = $iva + $precio->subTotal;
-
-													 ?>
-
-												</div>
-												<div id="script">
-
-												</div>
-
-
-											</div>
-										</center>
-									</div>
-								</div>
-								<div class="col-md-7 total">
-									<div class="total_">
-										<center>
-											<div class="icono">
-												<img src="../img/icons/factura.png" alt="" />
-											</div>
-										</center>
-										<div class="texto">
-											<div class="text">
-												<span>Sub-total:</span> <span><b id="sub-total"><?php echo number_format($precio->subTotal,2, ',', '.'); ?></b> Bsf</span>
-											</div>
-											<div class="text">
-												<span>Iva:</span> <span><b id="iva"><?php echo number_format($iva,2, ',', '.'); ?></b> Bsf</span>
-											</div>
-											<div class="text">
-												<span class="tot_">total:</span> <span><b id="total"><?php echo number_format($total,2, ',', '.'); ?></b> Bsf</span>
-											</div>
+		<div class="detalle-reservas division">
+			<center>
+				<div class="division_cont">
+					<div class="detalle-reservas-head">
+						<p>
+							Detalles de la Reserva
+						</p>
+					</div>
+					<div class="detalle-reservas-cont" id="contDetalle">
+						<div class="col-md-5 detalle">
+							<div class="item">
+								<center>
+									<div class="titulo">
+										<div class="icon">
+											<img src="../img/icons/descripcion.png" alt="" />
 										</div>
-									</div>
-									<form action="" id="form_reservar">
-										<div class="muestra" id="muestra">
-											<?php
-												foreach ($apartado as $a) {
-											?>
-												<div class="muestra_" id="muestra_<?php echo $a->idDepartamento,'_',$a->idcategoria ?>">
-													<div class="titulo">
-														<div class="icono">
-															<img src="../img/icons/descripcion.png" alt="" />
-														</div>
-														<div class="text">
-															<?php echo $a->nombreCategoria ?>
-														</div>
-													</div>
-													<table>
-														<thead>
-															<tr>
-																<th>
-																	<img src="../img/icons/fecha.png" alt="" />
-																</th>
-																<th>
-																	<img src="../img/icons/reloj.png" alt="" />
-																</th>
-																<th>
-																	<img src="../img/icons/factura.png" alt="" />
-																</th>
-															</tr>
-														</thead>
-														<tbody id="detalleCompra">
-															<?php
-															$descripcion = $conexion->prepare("SELECT * FROM apartado where idcategoria = '".$a->idcategoria."'  and fecha >= '".date("Y-m-d")."' and iduser = '".$userRow->id."'  ");
-															$descripcion->execute();
-															$descripcion=$descripcion->fetchAll(PDO::FETCH_OBJ);
+										<div class="texto" id="detalle">
 
-																foreach ($descripcion as $d) {
-															?>
-																<tr id="<?php echo $d->id; ?>">
-																	<td><input type="text" name="fecha" class="fech" id="fecha" value="<?php echo date("Y-m-d", strtotime($d->fecha))?>" readonly="readonly"></td>
-																	<td><input type="text" name="hora[]" class="hr" value="<?php echo date("h:i a", strtotime($d->hora)) ?>" readonly="readonly"></td>
-																	<td class="precio">
-																		<input type="text" name="precio[]" class="tl" value="<?php echo $d->precio ?>" readonly="readonly">
-																		<input type="hidden" name="nombre[]" class="nmb" id="nombre" value="<?php echo $d->nombreCategoria ?>" readonly="readonly">
-																		<input type="hidden" name="idDepartamento[]" class="cd" id="idDepartamento" value="<?php echo $d->idDepartamento ?>" readonly="readonly">
-																		<input type="hidden" name="idCategoria[]" class="ct" value="<?php echo $d->idcategoria ?>" readonly="readonly">
-																		<input type="hidden" id="idUser" name="idUser" value="<?php echo $userRow->id ?>" readonly="readonly">
-																	</td>
-																</tr>
-															<?php
-																}
-															 ?>
-														</tbody>
-													</table>
-												</div>
 											<?php
-												}
+												$apartado = $conexion->prepare("SELECT * FROM apartado where iduser = '".$userRow->id."' and fecha >= '".date("Y-m-d")."' group by idcategoria");
+												$apartado->execute();
+												$apartado=$apartado->fetchAll(PDO::FETCH_OBJ);
+
+													foreach ($apartado as $a) {
+											?>
+														<div class="text" id="<?php echo $a->idDepartamento ?>_<?php echo $a->idcategoria ?>">
+															<h5><?php echo $a->nombreCategoria ?></h5>
+														</div>
+											<?php
+
+
+											}
+											$precio = $conexion->prepare("SELECT sum(precio) as subTotal FROM apartado where idUser = '".$userRow->id."'  and fecha >= '".date("Y-m-d")."' " );
+											$precio->execute();
+											$precio=$precio->fetch(PDO::FETCH_OBJ);
+
+											$iva = 12 * $precio->subTotal;
+											$iva = $iva / 100;
+
+											$total = $iva + $precio->subTotal;
+
 											 ?>
 
 										</div>
+										<div id="script">
 
+										</div>
+
+
+									</div>
+								</center>
+							</div>
+						</div>
+						<div class="col-md-7 total">
+							<div class="total_">
+								<div class="icono">
+									<img src="../img/icons/factura.png" alt="" />
+								</div>
+								<div class="texto">
+									<div class="text">
+										<span>Sub-total:</span> <span><b id="sub-total"><?php echo number_format($precio->subTotal,2, ',', '.'); ?></b> Bsf</span>
+									</div>
+									<div class="text">
+										<span>Iva:</span> <span><b id="iva"><?php echo number_format($iva,2, ',', '.'); ?></b> Bsf</span>
+									</div>
+									<div class="text">
+										<span class="tot_">total:</span> <span><b id="total"><?php echo number_format($total,2, ',', '.'); ?></b> Bsf</span>
+									</div>
 								</div>
 							</div>
-							<div class="boton_reservar">
-								<button type="button" name="button" id="sent"><span><div class="icon"><img src="../img/icons/reserva.png" alt=""></div><b>Reservar</b></span></button>
-							</div>
-						</form>
-						</div>
+							<form action="" id="form_reservar">
+								<div class="muestra" id="muestra">
+									<?php
+										foreach ($apartado as $a) {
+									?>
+										<div class="muestra_" id="muestra_<?php echo $a->idDepartamento,'_',$a->idcategoria ?>">
+											<div class="titulo">
+												<div class="icono">
+													<img src="../img/icons/descripcion.png" alt="" />
+												</div>
+												<div class="text">
+													<?php echo $a->nombreCategoria ?>
+												</div>
+											</div>
+											<table>
+												<thead>
+													<tr>
+														<th>
+															<img src="../img/icons/fecha.png" alt="" />
+														</th>
+														<th>
+															<img src="../img/icons/reloj.png" alt="" />
+														</th>
+														<th>
+															<img src="../img/icons/factura.png" alt="" />
+														</th>
+													</tr>
+												</thead>
+												<tbody id="detalleCompra">
+													<?php
+													$descripcion = $conexion->prepare("SELECT * FROM apartado where idcategoria = '".$a->idcategoria."'  and fecha >= '".date("Y-m-d")."' and iduser = '".$userRow->id."'  ");
+													$descripcion->execute();
+													$descripcion=$descripcion->fetchAll(PDO::FETCH_OBJ);
 
-					</center>
+														foreach ($descripcion as $d) {
+													?>
+														<tr id="<?php echo $d->id; ?>">
+															<td><input type="text" name="fecha" class="fech" id="fecha" value="<?php echo date("Y-m-d", strtotime($d->fecha))?>" readonly="readonly"></td>
+															<td><input type="text" name="hora[]" class="hr" value="<?php echo date("h:i a", strtotime($d->hora)) ?>" readonly="readonly"></td>
+															<td class="precio">
+																<input type="text" name="precio[]" class="tl" value="<?php echo $d->precio ?>" readonly="readonly">
+																<input type="hidden" name="nombre[]" class="nmb" id="nombre" value="<?php echo $d->nombreCategoria ?>" readonly="readonly">
+																<input type="hidden" name="idDepartamento[]" class="cd" id="idDepartamento" value="<?php echo $d->idDepartamento ?>" readonly="readonly">
+																<input type="hidden" name="idCategoria[]" class="ct" value="<?php echo $d->idcategoria ?>" readonly="readonly">
+																<input type="hidden" id="idUser" name="idUser" value="<?php echo $userRow->id ?>" readonly="readonly">
+															</td>
+														</tr>
+													<?php
+														}
+													 ?>
+												</tbody>
+											</table>
+										</div>
+									<?php
+										}
+									 ?>
+
+								</div>
+
+						</div>
+					</div>
+					<div class="boton_reservar">
+						<button type="button" name="button" id="sent"><span><div class="icon"><img src="../img/icons/reserva.png" alt=""></div><b>Reservar</b></span></button>
+					</div>
+				</form>
 
 				</div>
+			</center>
+
+		</div>
+
 
 	</div>
 
-	<footer class="col-sm-12 col-xs-12" style="bottom: 0;">
-		<div class="footer-detalles col-md-7 col-sm-7 col-xs-7">
-			<div class="">Todos Los derechos reservados. Diseñado por <a href="http://dementecreativo.com/" target="_blank"> <img src="../img/demente.png" alt="" /> </a></div></div>
-		</div>
-		<div class="footer-redes col-md-5 col-sm-5 col-xs-5">
-			<div class="border-redes"><i class="fa fa-facebook"></i></div>
-			<div class="border-redes"><i class="fa fa-twitter"></i></div>
-			<div class="border-redes"><i class="fa fa-instagram"></i></div>
-		</div>
-	</footer>
-  <div class="visible-lg">
-    <br>
-  </div>
+
+	<div class="footer">
+		<div class="container">
+			<div class="footer_cont">
+				<div class="item_ left">
+					<p>
+						Todos Los derechos reservados. Diseñado por <a href="http://dementecreativo.com/" target="_blank"> <img src="../img/demente.png" alt="" /> </a>
+					</p>
+				</div>
+				<div class="item_ right">
+					<ul class="redes">
+						<li>
+							<a href="#">
+								<i class="fa fa-facebook"></i>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<i class="fa fa-twitter"></i>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<i class="fa fa-instagram"></i>
+							</a>
+						</li>
+					</ul>
+				</div>
 
 
-  <div class="preloader1" id="preloader1"><img src="../img/logo-parte1.png" alt="" /></div>
-  <div class="preloader2" id="preloader2"><img src="../img/logo-parte2.png" alt="" /></div>
-  <div class="cortina1" id="cortina1"><img src="../img/logo-parte1.png" alt="" /></div>
-  <div class="cortina2" id="cortina2"><img src="../img/logo-parte2.png" alt="" /></div>
+			</div>
+		</div>
+
+	</div>
+
+
 
 
     <script src="../js/jquery-1.11.3.min.js"></script>
@@ -455,6 +600,215 @@ $userRow=$stmt->fetch(PDO::FETCH_OBJ);
 							}
 					});
 				}
+
+				var maxScrollLeft = $('.contenidoSeleccion .seleccionTabla table').width() - $('.contenidoSeleccion .seleccionTabla').width();
+				var left = 0;
+
+				$('.reservas .flecha i').click(function(){
+				  if ($(this).hasClass('left')) {
+				    var interval = setInterval(function(){ position() },5);
+				    var numero = 0;
+				    function position() {
+				      numero++;
+				      left = left - 1;
+				      $('.contenidoSeleccion .seleccionTabla').scrollLeft(left);
+				      if (numero >= 100) {
+				        clearInterval(interval);
+				      }
+				      if (left <= 0) {
+				        left = 0;
+				      }
+				    }
+				  }else {
+				    var interval = setInterval(function(){ position() },5);
+				    var numero = 0;
+				    function position() {
+				      numero++;
+				      left = left + 1;
+				      $('.contenidoSeleccion .seleccionTabla').scrollLeft(left);
+				      if (numero >= 100) {
+				        clearInterval(interval);
+				      }
+				      if (left >= maxScrollLeft) {
+				        left = maxScrollLeft;
+				      }
+				    }
+				  }
+				});
+
+				$('.reservas .reservas-cont .reservas-fecha .fecha').click(function(){
+				  if (!$('#dateReserva').hasClass('active')) {
+				    $('#dateReserva').addClass('active');
+				  }else {
+				    $('#dateReserva').removeClass('active');
+				  }
+				});
+
+				function buscarCatergoria(idUser, id, tipo, hora, id_th){
+				  var cont = $('#'+id_th).parent().parent().parent();
+				  function activar() {
+				    $('.reservas .reservas-cont table thead th').removeClass('active');
+				    $('#'+id_th).addClass('active');
+				    cont.addClass('active');
+				  }
+				  if (tipo == 'cancha') {
+				      $.ajax({
+				          type: "POST",
+				          url: "buscarCatergoria.php",
+				          data: {idUser:idUser, id:id, hora:hora},
+				          success: function(respuesta) {
+
+				              $('#contBuscar').html(respuesta);
+				              activar();
+				          }
+				      })
+				  } else {
+				    $.ajax({
+				      type: "POST",
+				      url: "buscarCatergoriaClase.php",
+				      data: {idUser:idUser, id:id, hora:hora},
+				      success: function(respuesta) {
+				        $('#contBuscar').html(respuesta);
+				        activar();
+				      }
+				    });
+				  }
+				}
+
+				  function procesarCategoria(tipo, id, idUser, idDepartamento, nombre, hora, precio, fecha__){
+
+				    var hora_ = hora.split(':');
+				    hora_ = hora_[0];
+
+				    // console.log();
+				    if (tipo == 'agregar') {
+				      $.ajax({
+				        type: "POST",
+				        url: "../controladores/Apartado.php",
+				        data: {idDepartamento:idDepartamento, idCategoria:id, nomCategoria:nombre, fecha:fecha__, hora:hora, precio:precio, idUser:idUser, tipo:tipo},
+				        success: function(data){
+				          var separar = data.split(',');
+				          var idDepartamento_ = parseInt(separar[0]);
+				          var idCategoria_ = parseInt(separar[1]);
+				          var nombre_ = separar[2];
+				          var numero_ = separar[3];
+				          var depCat = idDepartamento_+'_'+idCategoria_;
+
+				          if (numero_ > 0) {
+				            var ej;
+				            var cuenta = 0;
+				            $('.detalle-reservas-cont .detalle .titulo .texto .text').each(function(){
+				              cuenta++;
+				              if ($(this).attr('id') == depCat) {
+				                ej = true;
+				              }
+				            });
+				            if (ej !== true) {
+				              var muestra = '<div class="text" id="'+depCat+'" onmouseout="textHover(2,'+depCat+') onmouseover="textHover(1,'+depCat+')">';
+				              muestra += '<h5>'+nombre_+'</h5>';
+				              // muestra += '<div class="icon-mas"><i class="fa fa-eye"></i></div>';
+				              muestra +=	'</div>';
+				              $('.detalle-reservas-cont .detalle .titulo .texto').append(muestra);
+				              $('#script').html($('#locura').html());
+				            }
+				          }
+				          /************************************************************/
+				          $.ajax({
+				            type: "POST",
+				            url: "../controladores/Apartado_1.php",
+				            data: {idUser:idUser},
+				            success: function(data_){
+				              $('#muestra').html(data_);
+				              $('#script').html($('#locura').html());
+
+				              var sub_total = 0;
+				              $('#muestra .muestra_ .precio').each(function(){
+				                sub_total = sub_total + parseInt($('input', this).val());
+				              });
+
+				              iva = 12 * sub_total;
+				              iva = iva / 100;
+
+				              total = iva + sub_total;
+				              $('#sub-total').html(formatoNumero(sub_total,2, ',', '.'))
+				              $('#iva').html(formatoNumero(iva,2, ',', '.'))
+				              $('#total').html(formatoNumero(total,2, ',', '.'))
+				              // console.log(formatoNumero(total,2, ',', '.'));
+
+
+				            }
+				          });
+
+				          /************************************************************/
+
+				          $('#'+id+hora_).attr('onclick', "procesarCategoria('eliminar',"+id+", "+idUser+", "+idDepartamento+", '"+nombre+"', '"+hora+"',"+precio+",'"+fecha__+"')");
+
+				        }
+				      }); // End Ajax
+				    } else { //end If agregar star else
+				      $.ajax({
+				        type: "POST",
+				        url: "../controladores/Apartado.php",
+				        data: {idDepartamento:idDepartamento, idCategoria:id, nomCategoria:nombre, fecha:fecha__, hora:hora, precio:precio, idUser:idUser, tipo:tipo},
+				        success: function(data){
+				          var separar = data.split(',');
+				          var idDepartamento_ = parseInt(separar[0]);
+				          var idCategoria_ = parseInt(separar[1]);
+				          var nombre_ = separar[2];
+				          var numero_ = separar[3];
+
+				          if (numero_ < 1) {
+				            $('#'+idDepartamento_+'_'+idCategoria_).fadeOut(300);
+				            setTimeout(function(){ $('#'+idDepartamento_+'_'+idCategoria_).remove(); },300);
+				          }
+
+				          $.ajax({
+				            type: "POST",
+				            url: "../controladores/Apartado_1.php",
+				            data: {idDepartamento:idDepartamento, idCategoria:id, nomCategoria:nombre, fecha:fecha__, hora:hora, precio:precio, idUser:idUser, tipo:tipo},
+				            success: function(data_){
+				              $('#muestra').html(data_);
+				              var sub_total = 0;
+				              $('#muestra .muestra_ .precio').each(function(){
+				                sub_total = sub_total + parseInt($('input', this).val());
+				              });
+
+				              iva = 12 * sub_total;
+				              iva = iva / 100;
+
+				              total = iva + sub_total;
+				              $('#sub-total').html(formatoNumero(sub_total,2, ',', '.'))
+				              $('#iva').html(formatoNumero(iva,2, ',', '.'))
+				              $('#total').html(formatoNumero(total,2, ',', '.'))
+				            }
+				          });
+
+
+				          $('#'+id+hora_).attr('onclick', "procesarCategoria('agregar',"+id+", "+idUser+", "+idDepartamento+", '"+nombre+"', '"+hora+"',"+precio+",'"+fecha__+"')");
+				        }
+				      });
+				    }//end else If agregar
+				  } //end function procesarCategoria
+
+				$("#dateReserva").change(function(){
+				  var id = parseInt("<?php echo $c->id ?>");
+				  var idUser = parseInt("<?php echo $userRow->id ?>");
+				  var tipo = "<?php echo $c->tipo ?>";
+				  var date = $("#dateReserva").val();
+				  $.ajax({
+				      type: "POST",
+				      url: "categoriaDepartamentoFecha.php",
+				      data: {id:id, date:date, idUser:idUser, tipo:tipo},
+				      success: function(respuesta) {
+				        $('.reservas .reservas-head ul li').removeClass("active");
+				        $('#cate_'+id).addClass("active");
+				        $('#contenidoSeleccion').html(respuesta);
+				        $('#dateReserva').removeClass('active');
+
+				      }
+				  });
+				  return false;
+				});
 
 		</script>
 

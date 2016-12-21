@@ -29,18 +29,10 @@ $conexion = new Conexion();
 ?>
       <?php foreach ($categorias as $c) { ?>
         <div class="cancha li_actividades_<?php echo $c->id; ?>">
-          <div class="titulo valign-wrapper">
-            <h5 class="valign"><?php echo $c->nombre ?></h5>
-          </div>
          <?php
           $horaInicio1 = date("h", strtotime($c->horaInicio))." ";
           $horaFin1 = date("H", strtotime($c->horaFin))." ";
           $total1 = ($horaFin1 - $horaInicio1 + 01)." ";
-
-         ?>
-
-          <?php
-
               //SI HAY ESPACIOS DE HORA DE INICIO DE HORA CALCULAMOS LOS ESPACIOS Y PONEMOS LA HORA Q PERTENECE
                 for ($h=0; $h <= $total1; $h++) {
                   if (date("h:i a", strtotime($hora->horaInicio)+(3600*$h)) == $_POST['hora']) {
@@ -59,8 +51,6 @@ $conexion = new Conexion();
                     if (!$reserva) {
                       //hacer acumulador para ir sumando una hora
                       ?>
-                      <div class="image valign-wrapper">
-                        <center>
                           <?php
                             $apartado = $conexion->prepare("SELECT * FROM apartado where idUser = '".$user->id."' and nombreCategoria = '".$c->nombre."' and fecha = '".date("Y-m-d")."'  and hora = '".date("H:i:s", strtotime($hora->horaInicio)+(3600*$h))."'");
                             $apartado->execute();
@@ -68,29 +58,46 @@ $conexion = new Conexion();
 
                             if ($apartado) {
                           ?>
+                          <div class="image active valign-wrapper pointer" id="<?php echo $c->id.date("h", strtotime($hora->horaInicio)+(3600*$h)) ?>"  onclick="procesarCategoria('eliminar',<?php echo $c->id ?>,<?php echo $user->id ?>,<?php echo $c->idDepartamento ?>,'<?php echo $c->nombre ?>','<?php echo date("h:i a", strtotime($hora->horaInicio)+(3600*$h)) ?>',<?php echo $c->precio ?>, '<?php echo date("Y-m-d") ?>')">
 
-                          <div class="img valign active" id="<?php echo $c->id.date("h", strtotime($hora->horaInicio)+(3600*$h)) ?>" onclick="procesarCategoria('eliminar',<?php echo $c->id ?>,<?php echo $user->id ?>,<?php echo $c->idDepartamento ?>,'<?php echo $c->nombre ?>','<?php echo date("h:i a", strtotime($hora->horaInicio)+(3600*$h)) ?>',<?php echo $c->precio ?>)">
+                          <!-- Imagen 2  -->
                             <?php
                               } else {
                             ?>
-                            <div class="img valign" id="<?php echo $c->id.date("h", strtotime($hora->horaInicio)+(3600*$h)) ?>" onclick="procesarCategoria('agregar',<?php echo $c->id ?>,<?php echo $user->id ?>,<?php echo $c->idDepartamento ?>,'<?php echo $c->nombre ?>','<?php echo date("h:i a", strtotime($hora->horaInicio)+(3600*$h)) ?>',<?php echo $c->precio ?>)">
+                            <div class="image valign-wrapper pointer" id="<?php echo $c->id.date("h", strtotime($hora->horaInicio)+(3600*$h)) ?>" onclick="procesarCategoria('agregar',<?php echo $c->id ?>,<?php echo $user->id ?>,<?php echo $c->idDepartamento ?>,'<?php echo $c->nombre ?>','<?php echo date("h:i a", strtotime($hora->horaInicio)+(3600*$h)) ?>',<?php echo $c->precio ?>, '<?php echo date("Y-m-d") ?>')">
+
                               <?php
                                 }
                               ?>
+                          <div class="img valign img_1" >
                             <img src="../img/icons/<?php echo $departamentoImg->imgDis ?>" alt="" />
                             <img src="../img/icons/<?php echo $departamentoImg->imgSelect ?>" alt="" />
                           </div>
-                        </center>
+                          <div class="titulo valign-wrapper">
+                            <h5 class="valign"><?php echo $c->nombre ?></h5>
+                          </div>
+                          <!-- Imagen 2  -->
+
+                        <div class="img valign img_2">
+                          <img src="../img/icons/<?php echo $departamentoImg->imgDis ?>" alt="" />
+                          <img src="../img/icons/<?php echo $departamentoImg->imgSelect ?>" alt="" />
+                        </div>
+
+
                       </div>
                       <?php
                     } else {
                       ?>
-                      <div class="image valign-wrapper">
-                        <center>
-                          <div class="img valign">
+                      <div class="image no_disp valign-wrapper">
+                          <div class="img img_1 valign">
                             <img src="../img/icons/<?php echo $departamentoImg->imgNoDis ?>" alt="" />
                           </div>
-                        </center>
+                          <div class="titulo valign-wrapper">
+                            <h5 class="valign"><?php echo $c->nombre ?></h5>
+                          </div>
+                          <div class="img img_2 valign">
+                            <img src="../img/icons/<?php echo $departamentoImg->imgNoDis ?>" alt="" />
+                          </div>
                       </div>
                       <?php
                     }
@@ -102,11 +109,12 @@ $conexion = new Conexion();
 
 
 <script type="text/javascript">
-$('.reservas .reservas-cont .contBuscar .cancha .image .img').click(function(){
-  if (!$(this).hasClass('active')) {
-    $(this).addClass("active");
+$('.reservas .reservas-cont .contBuscar .cancha .image').click(function(){
+  var image = $(this);
+  if (!image.hasClass('active')) {
+    image.addClass("active");
   }else {
-    $(this).removeClass("active");
+    image.removeClass("active");
   }
 });
 

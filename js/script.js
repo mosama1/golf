@@ -26,94 +26,31 @@ $(document).ready(function() {
     });
 });
 $(window).load(function() {
-    $("#preloader1").delay(300).slideUp(400);
-    $("#preloader2").delay(300).slideUp(400);
+  setTimeout(function(){
+    $('.preload').fadeOut();
+  },500);
+
 });
 
 
-$(window, "#contacto,#nosotros,#reservar").scroll(function(a) {
-    height = $(a.target).scrollTop();
-    if (height > 1 && height < 20000) {
-        $("nav").addClass("black").removeClass("normal");
-        $("nav img").addClass("img-reducida").removeClass("img-normal");
-    } else {
-        $("nav").removeClass("black").addClass("normal");
-        $("nav img").removeClass("img-reducida").addClass("img-normal");
-    }
-});
-
-
-
-$(document).ready(function() {
-    var b = new google.maps.LatLng(10.5052301, -66.9027257);
-    var f = {
-        scrollwheel: false,
-        navigationControl: false,
-        mapTypeControl: false,
-        scaleControl: false,
-        draggable: false,
-        zoom: 17,
-        center: b,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    var e = document.getElementById("mapa");
-    var d = new google.maps.Map(e, f);
-    var a = new google.maps.Marker({
-        position: new google.maps.LatLng(10.5040866, -66.9025098),
-        map: d
-    });
-    var c = new google.maps.InfoWindow({
-        content: "<h3>Caracas, Venezuela</h3></br> <p><b>Dirección:</b>  Esquina de puente Anauco, Edf. Camara de Industrial, Piso 7, Ofc 7A y 7B, Urb. La Candelaria</p><p><b>Telefono: </b> +58 212 0000000</p>",
-        maxWidth: 300
-    });
-    c.open(d, a);
-});
-
-
-document.getElementById("ir-index").onclick = function() {
-    var a = this.href;
-    var b = function() {
-        window.location.href = a;
-    };
-    setTimeout(b, 400);
-    return false;
-};
-document.getElementById("ir-nosotros").onclick = function() {
-    var a = this.href;
-    var b = function() {
-        window.location.href = a;
-    };
-    setTimeout(b, 400);
-    return false;
-};
-document.getElementById("ir-servicios").onclick = function() {
-    var a = this.href;
-    var b = function() {
-        window.location.href = a;
-    };
-    setTimeout(b, 400);
-    return false;
-};
-document.getElementById("ir-contacto").onclick = function() {
-    var a = this.href;
-    var b = function() {
-        window.location.href = a;
-    };
-    setTimeout(b, 400);
-    return false;
-};
-document.getElementById("ir-reservar").onclick = function() {
-    var a = this.href;
-    var b = function() {
-        window.location.href = a
-    };
-    setTimeout(b, 400);
-    return false;
-};
-
-
-
-
+// function preload() {
+//   var preload = setInterval(function(){ cargando(); }, 150);
+//
+//   var i = 0;
+//   function cargando() {
+//     i++;
+//     $('.preload ul li:nth-child('+i+')').addClass('active');
+//
+//     if (i > $('.preload ul li').length + 3) {
+//       i=0;
+//       $('.preload ul li').removeClass('active');
+//     }
+//     console.log(i);
+//     // clearInterval(preload);
+//   }
+// }
+// preload();
+//
 
 
 
