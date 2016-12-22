@@ -70,8 +70,8 @@ $conexion = new Conexion();
                                 }
                               ?>
                           <div class="img valign img_1" >
-                            <img src="../img/icons/<?php echo $departamentoImg->imgDis ?>" alt="" />
-                            <img src="../img/icons/<?php echo $departamentoImg->imgSelect ?>" alt="" />
+                            <img src="../img/icons/<?php echo $departamentoImg->imgDis ?>.png" alt="" />
+                            <img src="../img/icons/<?php echo $departamentoImg->imgSelect ?>.png" alt="" />
                           </div>
                           <div class="titulo valign-wrapper">
                             <h5 class="valign"><?php echo $c->nombre ?></h5>
@@ -79,8 +79,8 @@ $conexion = new Conexion();
                           <!-- Imagen 2  -->
 
                         <div class="img valign img_2">
-                          <img src="../img/icons/<?php echo $departamentoImg->imgDis ?>" alt="" />
-                          <img src="../img/icons/<?php echo $departamentoImg->imgSelect ?>" alt="" />
+                          <img src="../img/icons/<?php echo $departamentoImg->imgDis ?>_1.png" alt="" />
+                          <img src="../img/icons/<?php echo $departamentoImg->imgSelect ?>_1.png" alt="" />
                         </div>
 
 
@@ -90,13 +90,13 @@ $conexion = new Conexion();
                       ?>
                       <div class="image no_disp valign-wrapper">
                           <div class="img img_1 valign">
-                            <img src="../img/icons/<?php echo $departamentoImg->imgNoDis ?>" alt="" />
+                            <img src="../img/icons/<?php echo $departamentoImg->imgNoDis ?>.png" alt="" />
                           </div>
                           <div class="titulo valign-wrapper">
                             <h5 class="valign"><?php echo $c->nombre ?></h5>
                           </div>
                           <div class="img img_2 valign">
-                            <img src="../img/icons/<?php echo $departamentoImg->imgNoDis ?>" alt="" />
+                            <img src="../img/icons/<?php echo $departamentoImg->imgNoDis ?>_1.png" alt="" />
                           </div>
                       </div>
                       <?php

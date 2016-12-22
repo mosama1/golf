@@ -830,7 +830,7 @@ margin-bottom: 0; }
 
 
 .reservas .reservas-cont table thead th:first-child{
-  min-width: 150px;
+  min-width: 130px;
   text-transform: uppercase;
   position: relative;
   text-align: left;
@@ -847,8 +847,8 @@ margin-bottom: 0; }
 .reservas .reservas-cont table thead th:first-child .flecha{
   position: absolute;
   top: 13px;
-  right: -15px;
-  width: 30px;
+  right: 27px;
+  width: 0px;
   height: 25px;
   color: #fff;
   text-align: center;
@@ -873,7 +873,7 @@ margin-bottom: 0; }
 
 
 .reservas .reservas-cont table thead th:nth-child(2){
-    min-width: 245px;
+    min-width: 222px;
 }
 .reservas .reservas-cont table thead th:nth-child(2) a{
   margin-right: 10px;
@@ -895,13 +895,13 @@ margin-bottom: 0; }
   position: absolute;
   width: 2px;
   height: 100%;
-  left: -10px;
+  left: -18px;
   top: 0;
   background: #fff;
   transform: skewX(-15deg);
 }
 .reservas .reservas-cont table thead th:first-child .icon img{
-    width: 25px;
+    width: 20px;
 }
 /*.reservas .reservas-cont table tbody tr{
     background: rgb(230, 235, 150);
@@ -1002,10 +1002,10 @@ label > .img.active img:last-child{
   color: #3c3c3b;
 }
 .reservas .reservas-cont .contBuscar .cancha .image.active h5{
-  color: #e87614;
+  color: #3eab36;
 }
 .reservas .reservas-cont .contBuscar .cancha .image.no_disp h5{
-  color: rgb(255, 0, 0);
+  color: #e6322b;
 }
 
 .reservas .reservas-cont .contBuscar .cancha .image{
@@ -1029,10 +1029,16 @@ label > .img.active img:last-child{
 }
 .reservas .reservas-cont .contBuscar .cancha .image .img.img_1 img{
   left: 0;
+  top: -2px;
+  width: 22px;
+  height: auto;
 
 }
 .reservas .reservas-cont .contBuscar .cancha .image .img.img_2 img{
   right: 0;
+  width: 30px;
+  height: auto;
+  top: 5px;
 }
 
 
@@ -1279,6 +1285,9 @@ label > .img.active img:last-child{
   position: relative;
   min-height: 40px;
 }
+.detalle-reservas-cont .detalle .titulo .texto{
+  padding-top: 55px;
+}
 .detalle-reservas-cont .detalle .icon{
   width: 40px;
   height: 40px;
@@ -1291,11 +1300,11 @@ label > .img.active img:last-child{
   width: 40px;
 }
 .detalle-reservas-cont .detalle .text{
-  margin-left: 50px;
+  margin-left: 0px;
   margin-top: 5px;
   position: relative;
-  padding: 7.5px 45px 7.5px 15px;
-  height: 30px;
+  padding: 0px 15px;
+  height: auto;
   color: #373736;
 }
 
@@ -1317,7 +1326,8 @@ label > .img.active img:last-child{
   font-weight: normal;
   margin: 0;
   text-transform: uppercase;
-  text-align: left;
+  text-align: center;
+  font-size: 17px;
 }
 /*.detalle-reservas-cont .detalle .text div{
   width: 100%;
@@ -1455,6 +1465,7 @@ label > .img.active img:last-child{
 }
 .total .icono img{
   margin-top: 10px;
+  width: 50px;
 }
 .total .text{
   font-size: 15px;
